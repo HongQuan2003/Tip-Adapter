@@ -185,12 +185,12 @@ imagenet_templates = ["itap of a {}.",
 
 class ImageNet():
 
-    dataset_dir = 'imagenet'
+    dataset_dir = 'Annotations'
 
     def __init__(self, root, num_shots, preprocess):
 
         self.dataset_dir = os.path.join(root, self.dataset_dir)
-        self.image_dir = os.path.join(self.dataset_dir, 'images')
+        self.image_dir = os.path.join(self.dataset_dir, 'CLS-LOC')
 
         train_preprocess = transforms.Compose([
                                                 transforms.RandomResizedCrop(size=224, scale=(0.5, 1), interpolation=transforms.InterpolationMode.BICUBIC),
