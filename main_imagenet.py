@@ -39,6 +39,10 @@ def run_tip_adapter(cfg, cache_keys, cache_values, test_features, test_labels, c
     acc = cls_acc(tip_logits, test_labels)
     print("**** Tip-Adapter's test accuracy: {:.2f}. ****\n".format(acc))
 
+    with open("Tip-adapter_Result", 'a') as file:
+        file.write(str(acc) + '\n')
+    
+    
     # Search Hyperparameters
     _ = search_hp(cfg, cache_keys, cache_values, test_features, test_labels, clip_weights)
 
@@ -106,6 +110,10 @@ def run_tip_adapter_F(cfg, cache_keys, cache_values, test_features, test_labels,
     adapter.weight = torch.load(cfg['cache_dir'] + "/best_F_" + str(cfg['shots']) + "shots.pt")
     print(f"**** After fine-tuning, Tip-Adapter-F's best test accuracy: {best_acc:.2f}, at epoch: {best_epoch}. ****\n")
 
+    with open("Tip-adapter-F_Result", 'a') as file:
+        file.write(str(best_acc) + '\n')
+
+    
     # Search Hyperparameters
     _ = search_hp(cfg, affinity, cache_values, test_features, test_labels, clip_weights, adapter=adapter)
 
